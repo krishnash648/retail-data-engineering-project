@@ -188,3 +188,24 @@ py scripts/load_to_sql.py
 - Layered architecture improves maintainability and pipeline organization
 - Logging was implemented for monitoring ETL execution
 - Simulated AWS S3 bucket structure mirrors enterprise cloud data lake architecture
+
+## Pipeline Orchestration Design
+
+The ETL pipeline was designed following a DAG-based orchestration approach inspired by Apache Airflow workflows.
+
+Planned pipeline stages:
+
+1. Data Ingestion Task
+2. PySpark Transformation Task
+3. Gold Layer Analytics Task
+4. SQL Loading Task
+5. Dashboard Refresh Task
+
+This modular workflow design improves:
+- pipeline maintainability
+- task dependency management
+- scalability
+- scheduling capability
+- monitoring and retry handling
+
+Future implementation can integrate Apache Airflow for automated workflow scheduling and orchestration.
