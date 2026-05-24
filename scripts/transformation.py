@@ -60,18 +60,21 @@ logging.info(f"Cleaned Row Count: {cleaned_count}")
 # Show transformed data
 df.show(5)
 
-# Convert Spark DataFrame to Pandas
-pandas_df = df.toPandas()
+# Save cleaned data as CSV
+df.coalesce(1).write.mode("overwrite") \
+.option("header", "true") \
+.csv("data/processed/cleaned_retail_csv")
 
-# Save cleaned data
-pandas_df.to_csv(
-    "data/processed/cleaned_retail.csv",
-    index=False
-)
+# Save optimized parquet format
+df.write.mode("overwrite") \
+.partitionBy("Country") \
+.parquet("data/processed/parquet_output")
 
 print("Cleaned data saved successfully!")
 
 logging.info("Cleaned data saved successfully")
+
+logging.info("Parquet files generated successfully")
 
 logging.info("Transformation pipeline completed")
 

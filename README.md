@@ -1,4 +1,14 @@
-# Retail Data Engineering Project
+# Retail Data Engineering Pipeline using PySpark, SQL & Power BI
+
+An end-to-end ETL and analytics pipeline built using PySpark for large-scale data processing, SQLite for analytics storage, and Power BI for business intelligence dashboards.
+
+## Features
+- Processed 500K+ retail transaction records
+- Implemented layered ETL architecture (raw → processed → gold)
+- Built Spark-based transformation workflows
+- Generated SQL-driven business insights
+- Created interactive Power BI analytics dashboard
+- Added logging for pipeline monitoring
 
 ## Overview
 
@@ -149,3 +159,4 @@ py scripts/load_to_sql.py
 - Implemented layered data architecture (raw → processed → gold)
 - Integrated SQL analytics and Power BI dashboarding
 - Generated business insights using Spark transformations and SQL queries
+- Optimized storage using Parquet format and Spark partitioning
