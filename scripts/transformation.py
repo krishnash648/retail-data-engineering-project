@@ -3,7 +3,10 @@ import logging
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import col
 
-# Configure logging
+# =========================================================
+# Configure Logging
+# =========================================================
+
 logging.basicConfig(
     filename="logs/transformation.log",
     level=logging.INFO,
@@ -12,27 +15,40 @@ logging.basicConfig(
 
 logging.info("Transformation pipeline started")
 
+# =========================================================
 # Create Spark Session
+# =========================================================
+
 spark = SparkSession.builder \
     .appName("RetailDataTransformation") \
     .config("spark.hadoop.io.native.lib.available", "false") \
     .getOrCreate()
 
-# Read raw data
+# =========================================================
+# Read Raw Dataset From Simulated S3 Raw Bucket
+# =========================================================
+
 df = spark.read.csv(
-    "data/raw/online_retail.csv",
+    "aws_s3_simulation/raw_bucket/online_retail.csv",
     header=True,
     inferSchema=True
 )
 
-# Initial row count
+# =========================================================
+# Initial Dataset Count
+# =========================================================
+
 initial_count = df.count()
 
 print("Initial Row Count:", initial_count)
 
 logging.info(f"Initial Row Count: {initial_count}")
 
-# Remove rows where CustomerID is null
+# =========================================================
+# Data Cleaning
+# =========================================================
+
+# Remove rows with null customer IDs
 df = df.dropna(subset=["CustomerID"])
 
 # Remove duplicate rows
@@ -44,39 +60,51 @@ df = df.filter(col("Quantity") > 0)
 # Remove invalid prices
 df = df.filter(col("UnitPrice") > 0)
 
-# Create total_amount column
+# Create total amount column
 df = df.withColumn(
     "total_amount",
     col("Quantity") * col("UnitPrice")
 )
 
-# Cleaned row count
+# =========================================================
+# Cleaned Dataset Count
+# =========================================================
+
 cleaned_count = df.count()
 
 print("Cleaned Row Count:", cleaned_count)
 
 logging.info(f"Cleaned Row Count: {cleaned_count}")
 
-# Show transformed data
+# =========================================================
+# Preview Data
+# =========================================================
+
 df.show(5)
 
-# Save cleaned data as CSV
-df.coalesce(1).write.mode("overwrite") \
-.option("header", "true") \
-.csv("data/processed/cleaned_retail_csv")
+# =========================================================
+# Convert Spark DataFrame to Pandas
+# =========================================================
 
-# Save optimized parquet format
-df.write.mode("overwrite") \
-.partitionBy("Country") \
-.parquet("data/processed/parquet_output")
+pandas_df = df.toPandas()
+
+# =========================================================
+# Save Cleaned CSV Into Processed Bucket
+# =========================================================
+
+pandas_df.to_csv(
+    "aws_s3_simulation/processed_bucket/cleaned_retail.csv",
+    index=False
+)
+
+logging.info("Processed CSV saved successfully")
 
 print("Cleaned data saved successfully!")
 
-logging.info("Cleaned data saved successfully")
-
-logging.info("Parquet files generated successfully")
-
 logging.info("Transformation pipeline completed")
 
+# =========================================================
 # Stop Spark Session
+# =========================================================
+
 spark.stop()

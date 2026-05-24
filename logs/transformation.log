@@ -4,3 +4,28 @@
 2026-05-24 21:08:11,635 - INFO - Cleaned data saved successfully
 2026-05-24 21:08:11,635 - INFO - Transformation pipeline completed
 2026-05-24 21:08:11,793 - INFO - Closing down clientserver connection
+2026-05-24 21:35:54,178 - INFO - Transformation pipeline started
+2026-05-24 21:36:07,325 - INFO - Initial Row Count: 541909
+2026-05-24 21:36:12,659 - INFO - Cleaned Row Count: 392692
+2026-05-24 21:36:19,688 - INFO - Closing down clientserver connection
+2026-05-24 21:39:59,062 - INFO - Transformation pipeline started
+2026-05-24 21:40:08,983 - INFO - Initial Row Count: 541909
+2026-05-24 21:40:12,459 - INFO - Cleaned Row Count: 392692
+2026-05-24 21:40:22,879 - INFO - Closing down clientserver connection
+2026-05-24 21:42:16,778 - INFO - Transformation pipeline started
+2026-05-24 21:42:30,013 - INFO - Initial Row Count: 541909
+2026-05-24 21:42:35,666 - INFO - Cleaned Row Count: 392692
+2026-05-24 21:42:45,994 - INFO - CSV cleaned data saved successfully
+2026-05-24 21:42:46,707 - INFO - Parquet file generated successfully
+2026-05-24 21:42:46,707 - INFO - Transformation pipeline completed
+2026-05-24 21:42:47,214 - INFO - Closing down clientserver connection
+2026-05-24 21:46:57,497 - INFO - Transformation pipeline started
+2026-05-24 21:47:07,527 - INFO - Initial Row Count: 541909
+2026-05-24 21:47:13,596 - INFO - Cleaned Row Count: 392692
+2026-05-24 21:47:21,247 - INFO - Closing down clientserver connection
+2026-05-24 21:51:58,781 - INFO - Transformation pipeline started
+2026-05-24 21:52:09,888 - INFO - Initial Row Count: 541909
+2026-05-24 21:52:16,351 - INFO - Cleaned Row Count: 392692
+2026-05-24 21:52:28,757 - INFO - Processed CSV saved successfully
+2026-05-24 21:52:28,757 - INFO - Transformation pipeline completed
+2026-05-24 21:52:29,271 - INFO - Closing down clientserver connection

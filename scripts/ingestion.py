@@ -7,7 +7,7 @@ spark = SparkSession.builder \
 
 # Read CSV
 df = spark.read.csv(
-    "data/raw/online_retail.csv",
+    "aws_s3_simulation/raw_bucket/online_retail.csv",
     header=True,
     inferSchema=True
 )

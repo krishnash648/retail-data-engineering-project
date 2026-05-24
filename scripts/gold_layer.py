@@ -2,7 +2,6 @@ import logging
 
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import (
-    col,
     sum,
     count,
     desc
@@ -26,14 +25,15 @@ logging.info("Gold layer analytics started")
 
 spark = SparkSession.builder \
     .appName("RetailGoldLayer") \
+    .config("spark.hadoop.io.native.lib.available", "false") \
     .getOrCreate()
 
 # =========================================================
-# Read Cleaned Dataset
+# Read Cleaned Dataset From Processed Bucket
 # =========================================================
 
 df = spark.read.csv(
-    "data/processed/cleaned_retail.csv",
+    "aws_s3_simulation/processed_bucket/cleaned_retail.csv",
     header=True,
     inferSchema=True
 )
@@ -107,26 +107,38 @@ country_transactions.show(10)
 logging.info("Country transactions analytics completed")
 
 # =========================================================
-# Save Outputs Locally
+# Convert Spark DataFrames to Pandas
 # =========================================================
 
-country_sales.toPandas().to_csv(
-    "data/final/country_sales.csv",
+country_sales_pd = country_sales.toPandas()
+
+top_products_pd = top_products.toPandas()
+
+top_customers_pd = top_customers.toPandas()
+
+country_transactions_pd = country_transactions.toPandas()
+
+# =========================================================
+# Save Outputs Into Gold Bucket
+# =========================================================
+
+country_sales_pd.to_csv(
+    "aws_s3_simulation/gold_bucket/country_sales.csv",
     index=False
 )
 
-top_products.toPandas().to_csv(
-    "data/final/top_products.csv",
+top_products_pd.to_csv(
+    "aws_s3_simulation/gold_bucket/top_products.csv",
     index=False
 )
 
-top_customers.toPandas().to_csv(
-    "data/final/top_customers.csv",
+top_customers_pd.to_csv(
+    "aws_s3_simulation/gold_bucket/top_customers.csv",
     index=False
 )
 
-country_transactions.toPandas().to_csv(
-    "data/final/country_transactions.csv",
+country_transactions_pd.to_csv(
+    "aws_s3_simulation/gold_bucket/country_transactions.csv",
     index=False
 )
 
