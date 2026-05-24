@@ -1,0 +1,9 @@
+2026-05-24 21:08:14,612 - INFO - Gold layer analytics started
+2026-05-24 21:08:30,221 - INFO - Cleaned dataset loaded successfully
+2026-05-24 21:08:34,215 - INFO - Country sales analytics completed
+2026-05-24 21:08:36,764 - INFO - Top products analytics completed
+2026-05-24 21:08:38,834 - INFO - Top customers analytics completed
+2026-05-24 21:08:40,178 - INFO - Country transactions analytics completed
+2026-05-24 21:08:46,816 - INFO - Gold layer analytics saved successfully
+2026-05-24 21:08:46,816 - INFO - Gold layer analytics completed
+2026-05-24 21:08:47,126 - INFO - Closing down clientserver connection

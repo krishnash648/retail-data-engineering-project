@@ -1,0 +1,6 @@
+2026-05-24 21:07:38,669 - INFO - Transformation pipeline started
+2026-05-24 21:07:54,209 - INFO - Initial Row Count: 541909
+2026-05-24 21:08:00,152 - INFO - Cleaned Row Count: 392692
+2026-05-24 21:08:11,635 - INFO - Cleaned data saved successfully
+2026-05-24 21:08:11,635 - INFO - Transformation pipeline completed
+2026-05-24 21:08:11,793 - INFO - Closing down clientserver connection
