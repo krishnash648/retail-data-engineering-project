@@ -24,14 +24,28 @@ The pipeline processes raw retail transaction data through multiple ETL stages t
 - PySpark
 - SQL
 - SQLite
-- Power BI
 - Pandas
+- Power BI
+- AWS S3 Simulation
+- Git & GitHub
 
 ---
 
 ## Project Architecture
 
-Raw Data → Ingestion Layer → Transformation Layer → Gold Layer Analytics → SQLite Database → Power BI Dashboard
+```text
+Raw Layer (Simulated AWS S3 Raw Bucket)
+        ↓
+PySpark ETL Transformation Pipeline
+        ↓
+Processed Layer (Cleaned Retail Data)
+        ↓
+Gold Layer Business Analytics
+        ↓
+SQLite Analytics Database
+        ↓
+Power BI Dashboard Visualization
+```
 
 ---
 
@@ -74,10 +88,10 @@ Created Power BI dashboard with:
 ```text
 retail-data-engineering-project/
 │
-├── data/
-│   ├── raw/
-│   ├── processed/
-│   └── final/
+├── aws_s3_simulation/
+│   ├── raw_bucket/
+│   ├── processed_bucket/
+│   └── gold_bucket/
 │
 ├── scripts/
 │   ├── ingestion.py
@@ -88,10 +102,13 @@ retail-data-engineering-project/
 ├── sql/
 │   └── business_queries.sql
 │
+├── logs/
+│   ├── transformation.log
+│   └── gold_layer.log
+│
 ├── screenshots/
 │   └── dashboard.png
 │
-├── retail_analytics.db
 ├── requirements.txt
 ├── README.md
 └── .gitignore
@@ -144,11 +161,13 @@ py scripts/load_to_sql.py
 
 ## Future Improvements
 
-- AWS S3 integration
-- Apache Airflow scheduling
-- Parquet storage optimization
-- Real-time streaming pipeline
-- Cloud deployment
+- Real AWS S3 integration
+- Apache Airflow pipeline scheduling
+- AWS Glue / Athena integration
+- Parquet-based optimized storage
+- Incremental ETL processing
+- Real-time Spark Streaming pipeline
+- Cloud deployment on AWS
 
 ---
 
@@ -159,4 +178,13 @@ py scripts/load_to_sql.py
 - Implemented layered data architecture (raw → processed → gold)
 - Integrated SQL analytics and Power BI dashboarding
 - Generated business insights using Spark transformations and SQL queries
-- Optimized storage using Parquet format and Spark partitioning
+- Implemented scalable Spark-based transformation workflows for large-volume retail transaction processing
+
+---
+
+## Scalability Considerations
+
+- PySpark was used instead of Pandas for distributed-style large-scale data processing
+- Layered architecture improves maintainability and pipeline organization
+- Logging was implemented for monitoring ETL execution
+- Simulated AWS S3 bucket structure mirrors enterprise cloud data lake architecture
